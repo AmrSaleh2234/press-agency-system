@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication2.Models.favourite>
+
+@{
+    ViewBag.Title = "myFavPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="container">
+        
+
+        @foreach (var item in Model)
+        {
+
+            <a href=" /posts/commentsAndposts/@item.post.Tid">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="@Url.Content(item.post.image)" alt="nonoe">
+                        <div class="caption">
+                            <h3>    @Html.DisplayFor(modelItem => item.post.artucle_title)  </h3>
+                            <p>    @Html.DisplayFor(modelItem => item.post.article_body)</p>
+
+                            <h5><b>Editor name:   @Html.DisplayFor(modelItem => item.user.Username)</b></h5>
+                        </div>
+                    </div>
+                </div>
+
+
+            </a>
+        }
+    </div>
+</div>

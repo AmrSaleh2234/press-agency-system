@@ -16,27 +16,10 @@ namespace WebApplication2.Controllers
         private Database1Entities3 db = new Database1Entities3();
 
         // GET: posts
-        public ActionResult Index()
-        {
-            var post = db.post.Include(p => p.user);
-            return View(post.ToList());
-        }
+        
 
         // GET: posts/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            post post = db.post.Find(id);
-            if (post == null)
-            {
-                return HttpNotFound();
-            }
-            return View(post);
-        }
-
+        
         // GET: posts/Create
         public ActionResult Create()
         {
@@ -73,7 +56,8 @@ namespace WebApplication2.Controllers
 
                 db.post.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               return RedirectToAction("Index", "home");
+
             }
 
 
@@ -128,7 +112,8 @@ namespace WebApplication2.Controllers
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","home");
+
             }
             ViewBag.cid = new SelectList(db.user, "Cid", "Username", post.cid);
             return View(post);
@@ -202,6 +187,21 @@ namespace WebApplication2.Controllers
 
         
             return View(query.ToList());
+        }
+        public ActionResult insert(int id)
+        {
+            var rec = db.post.Where(model => model.Tid == id).ToList().FirstOrDefault();
+
+            if (rec != null)
+            {
+                db.Entry(rec).State = EntityState.Detached;
+            }
+            rec.accept = 1;
+            db.Entry(rec).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index", "home");
+
+
         }
     }
 }

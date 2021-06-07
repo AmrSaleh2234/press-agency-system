@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 
-
+    
     <style>
         .customButton {
             background: #044889;
@@ -148,7 +148,7 @@
             border-top: none !important;
         }
 
-         /*============================================end write comment==================================================*/
+        /*============================================end write comment==================================================*/
 
 
     </style>
@@ -173,7 +173,7 @@
                 <ul class="nav navbar-nav">
 
                     <li> <a href=" /users/Edit/@Session["Cid"]/"> profile</a></li>
-                    @if (Session["userRole"] != null && Session["userRole"].ToString() != "user")
+                    @if (Session["userRole"] != null && Session["userRole"].ToString() == "admin")
                     {
                         <li> <a href=" /users/index/"> users' page</a></li>
                         <li> <a href=" /posts/index/"> posts page</a></li>

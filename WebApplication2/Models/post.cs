@@ -19,6 +19,7 @@ namespace WebApplication2.Models
         {
             this.comment = new HashSet<comment>();
             this.like = new HashSet<like>();
+            this.favourite = new HashSet<favourite>();
         }
     
         public int Tid { get; set; }
@@ -39,5 +40,7 @@ namespace WebApplication2.Models
         public virtual ICollection<comment> comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<like> like { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<favourite> favourite { get; set; }
     }
 }

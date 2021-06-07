@@ -20,15 +20,15 @@ namespace WebApplication2.Controllers
         public ActionResult Index_get()
         {
            
-                var post = db.post.Include(p => p.user);
-                return View(post.ToList());
+                var post = db.post.Where(model =>model.accept!=0).ToList();
+                return View(post);
            
         }
         [HttpPost]
         [ActionName("index")]
         public ActionResult index_post(string filter)
         {
-            var post = db.post.Where(model=>model.article_type==filter || model.artucle_title==filter || model.user.Username==filter).ToList();
+            var post = db.post.Where(model=>model.article_type==filter || model.artucle_title.Contains(filter) || model.user.Username==filter).ToList();
             return View(post);
         }
         
@@ -51,13 +51,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        [HttpGet]
-        [ActionName("register")]
-        public ActionResult register_get()
-        {
-            return RedirectToAction("Index");
-        }
-
+       
 
 
         [HttpPost]
@@ -71,7 +65,7 @@ namespace WebApplication2.Controllers
                 Session["cid"] = rec.Cid;
                 Session["Username"] = rec.Username;
                 Session["userRole"] = rec.user_role;
-                ViewBag.Message = user.Username;
+               
                 return RedirectToAction("index");
                 
             
@@ -92,6 +86,8 @@ namespace WebApplication2.Controllers
         {
 
             Session.Clear();
+
+            
                 
                 return RedirectToAction("index");
 
@@ -106,19 +102,6 @@ namespace WebApplication2.Controllers
 
 
 
-        public ActionResult MyProfile()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-        
-      
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
     }
 }

@@ -52,5 +52,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="favourite">
+      <EntityTypeMapping TypeName="Database1Model.favourite">
+        <MappingFragment StoreEntitySet="favourite">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="favId" ColumnName="favId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

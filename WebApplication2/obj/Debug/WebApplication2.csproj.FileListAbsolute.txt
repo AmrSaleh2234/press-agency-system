@@ -242,8 +242,8 @@ D:\projects\c#\press-agency-system\WebApplication2\bin\System.Web.WebPages.Razor
 D:\projects\c#\press-agency-system\WebApplication2\bin\Newtonsoft.Json.xml
 D:\projects\c#\press-agency-system\WebApplication2\bin\Antlr3.Runtime.pdb
 D:\projects\c#\press-agency-system\WebApplication2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.csprojAssemblyReference.cache
 D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.csproj.CoreCompileInputs.cache
 D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.csproj.CopyComplete
 D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.dll
 D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.pdb
+D:\projects\c#\press-agency-system\WebApplication2\obj\Debug\WebApplication2.csprojAssemblyReference.cache

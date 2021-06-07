@@ -84,9 +84,12 @@
             @Html.DisplayFor(modelItem => item.user.Username)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Tid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Tid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Tid })
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.Tid,@class="btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Tid ,@class="btn btn-primary"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Tid,@class="btn btn-danger" })
+           
+            @Html.ActionLink("agree","insert","posts" , new { id=item.Tid},new { @class="btn btn-primary" })
         </td>
     </tr>
 }

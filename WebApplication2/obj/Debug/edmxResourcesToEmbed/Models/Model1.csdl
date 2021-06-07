@@ -15,6 +15,7 @@
     <NavigationProperty Name="post" Relationship="Database1Model.FK__post__cid__5CD6CB2B" FromRole="user" ToRole="post" />
     <NavigationProperty Name="comment" Relationship="Database1Model.FK__comment__userId__2739D489" FromRole="user" ToRole="comment" />
     <NavigationProperty Name="like" Relationship="Database1Model.FK__like__userId__3D2915A8" FromRole="user" ToRole="like" />
+    <NavigationProperty Name="favourite" Relationship="Database1Model.FK__favourite__userI__76619304" FromRole="user" ToRole="favourite" />
   </EntityType>
   <EntityContainer Name="Database1Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="user" EntityType="Self.user" />
@@ -41,6 +42,15 @@
       <End Role="user" EntitySet="user" />
       <End Role="like" EntitySet="like" />
     </AssociationSet>
+    <EntitySet Name="favourite" EntityType="Database1Model.favourite" />
+    <AssociationSet Name="FK__favourite__pId__756D6ECB" Association="Database1Model.FK__favourite__pId__756D6ECB">
+      <End Role="post" EntitySet="post" />
+      <End Role="favourite" EntitySet="favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__favourite__userI__76619304" Association="Database1Model.FK__favourite__userI__76619304">
+      <End Role="user" EntitySet="user" />
+      <End Role="favourite" EntitySet="favourite" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="ComplexType1">
     <Property Type="Binary" Name="post_creatin" MaxLength="50" FixedLength="false" />
@@ -64,6 +74,7 @@
     <Property Name="isNew" Type="Int32" />
     <NavigationProperty Name="comment" Relationship="Database1Model.FK__comment__pId__04E4BC85" FromRole="post" ToRole="comment" />
     <NavigationProperty Name="like" Relationship="Database1Model.FK__like__postId__3C34F16F" FromRole="post" ToRole="like" />
+    <NavigationProperty Name="favourite" Relationship="Database1Model.FK__favourite__pId__756D6ECB" FromRole="post" ToRole="favourite" />
   </EntityType>
   <Association Name="FK__post__cid__5CD6CB2B">
     <End Type="Database1Model.user" Role="user" Multiplicity="1" />
@@ -142,6 +153,40 @@
         <PropertyRef Name="Cid" />
       </Principal>
       <Dependent Role="like">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="favourite">
+    <Key>
+      <PropertyRef Name="favId" />
+    </Key>
+    <Property Name="favId" Type="Int32" Nullable="false" />
+    <Property Name="pId" Type="Int32" />
+    <Property Name="userId" Type="Int32" />
+    <NavigationProperty Name="post" Relationship="Database1Model.FK__favourite__pId__756D6ECB" FromRole="favourite" ToRole="post" />
+    <NavigationProperty Name="user" Relationship="Database1Model.FK__favourite__userI__76619304" FromRole="favourite" ToRole="user" />
+  </EntityType>
+  <Association Name="FK__favourite__pId__756D6ECB">
+    <End Type="Database1Model.post" Role="post" Multiplicity="0..1" />
+    <End Type="Database1Model.favourite" Role="favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="Tid" />
+      </Principal>
+      <Dependent Role="favourite">
+        <PropertyRef Name="pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__favourite__userI__76619304">
+    <End Type="Database1Model.user" Role="user" Multiplicity="0..1" />
+    <End Type="Database1Model.favourite" Role="favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Cid" />
+      </Principal>
+      <Dependent Role="favourite">
         <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>

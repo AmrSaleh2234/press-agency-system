@@ -9,6 +9,14 @@
     <Property Name="pId" Type="int" Nullable="false" />
     <Property Name="userId" Type="int" />
   </EntityType>
+  <EntityType Name="favourite">
+    <Key>
+      <PropertyRef Name="favId" />
+    </Key>
+    <Property Name="favId" Type="int" Nullable="false" />
+    <Property Name="pId" Type="int" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
   <EntityType Name="like">
     <Key>
       <PropertyRef Name="lId" />
@@ -71,6 +79,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__favourite__pId__756D6ECB">
+    <End Role="post" Type="Self.post" Multiplicity="0..1" />
+    <End Role="favourite" Type="Self.favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="Tid" />
+      </Principal>
+      <Dependent Role="favourite">
+        <PropertyRef Name="pId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__favourite__userI__76619304">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="favourite" Type="Self.favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Cid" />
+      </Principal>
+      <Dependent Role="favourite">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__like__postId__625A9A57">
     <End Role="post" Type="Self.post" Multiplicity="1" />
     <End Role="like" Type="Self.like" Multiplicity="*" />
@@ -109,6 +141,7 @@
   </Association>
   <EntityContainer Name="Database1ModelStoreContainer">
     <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="favourite" EntityType="Self.favourite" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="like" EntityType="Self.like" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
@@ -119,6 +152,14 @@
     <AssociationSet Name="FK__comment__userId__2739D489" Association="Self.FK__comment__userId__2739D489">
       <End Role="user" EntitySet="user" />
       <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__favourite__pId__756D6ECB" Association="Self.FK__favourite__pId__756D6ECB">
+      <End Role="post" EntitySet="post" />
+      <End Role="favourite" EntitySet="favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK__favourite__userI__76619304" Association="Self.FK__favourite__userI__76619304">
+      <End Role="user" EntitySet="user" />
+      <End Role="favourite" EntitySet="favourite" />
     </AssociationSet>
     <AssociationSet Name="FK__like__postId__625A9A57" Association="Self.FK__like__postId__625A9A57">
       <End Role="post" EntitySet="post" />

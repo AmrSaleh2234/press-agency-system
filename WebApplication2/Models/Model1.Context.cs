@@ -29,5 +29,6 @@ namespace WebApplication2.Models
         public virtual DbSet<post> post { get; set; }
         public virtual DbSet<comment> comment { get; set; }
         public virtual DbSet<like> like { get; set; }
+        public virtual DbSet<favourite> favourite { get; set; }
     }
 }
