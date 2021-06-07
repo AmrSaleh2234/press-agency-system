@@ -89,7 +89,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.Tid ,@class="btn btn-primary"}) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Tid,@class="btn btn-danger" })
            
-            @Html.ActionLink("agree","insert","posts" , new { id=item.Tid},new { @class="btn btn-primary" })
+            @Html.ActionLink("agree", "insert", "posts", new { id = item.Tid}, new { @class = "btn btn-primary" });
         </td>
     </tr>
 }
