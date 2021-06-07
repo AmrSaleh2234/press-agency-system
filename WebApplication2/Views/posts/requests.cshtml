@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebApplication2.Models.post>
+
+@{
+    ViewBag.Title = "requests";
+    Layout = "~/Views/Shared/_FactoryLayout.cshtml";
+}
+
+<h2>requests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.artucle_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.article_body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_creatin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.article_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numbers_of_views)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accept)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.likes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.artucle_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.article_body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_creatin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.article_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numbers_of_views)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.likes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Tid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Tid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Tid })
+        </td>
+    </tr>
+}
+
+</table>

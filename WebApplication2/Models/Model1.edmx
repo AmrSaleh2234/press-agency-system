@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cBody" Type="nchar" MaxLength="150" />
+          <Property Name="pId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="like">
+          <Key>
+            <PropertyRef Name="lId" />
+          </Key>
+          <Property Name="postId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="lId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="Tid" />
+          </Key>
+          <Property Name="Tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cid" Type="int" Nullable="false" />
+          <Property Name="artucle_title" Type="varchar" MaxLength="50" />
+          <Property Name="article_body" Type="varchar" MaxLength="1000" />
+          <Property Name="post_creatin" Type="varchar" MaxLength="50" />
+          <Property Name="article_type" Type="varchar" MaxLength="50" />
+          <Property Name="numbers_of_views" Type="int" />
+          <Property Name="image" Type="varchar" MaxLength="50" />
+          <Property Name="accept" Type="int" />
+          <Property Name="likes" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="isNew" Type="int" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Cid" />
+          </Key>
+          <Property Name="Cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" />
+          <Property Name="Lname" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="photo" Type="varchar" MaxLength="50" />
+          <Property Name="pnum" Type="varchar" MaxLength="50" />
+          <Property Name="user_role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__comment__pId__160F4887">
+          <End Role="post" Type="Self.post" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="post">
+              <PropertyRef Name="Tid" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="pId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment__userId__2739D489">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__like__postId__625A9A57">
+          <End Role="post" Type="Self.post" Multiplicity="1" />
+          <End Role="like" Type="Self.like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="post">
+              <PropertyRef Name="Tid" />
+            </Principal>
+            <Dependent Role="like">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__like__userId__634EBE90">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="like" Type="Self.like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="like">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__post__cid__5CD6CB2B">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="post" Type="Self.post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="post">
+              <PropertyRef Name="cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="like" EntityType="Self.like" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__comment__pId__160F4887" Association="Self.FK__comment__pId__160F4887">
+            <End Role="post" EntitySet="post" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment__userId__2739D489" Association="Self.FK__comment__userId__2739D489">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__like__postId__625A9A57" Association="Self.FK__like__postId__625A9A57">
+            <End Role="post" EntitySet="post" />
+            <End Role="like" EntitySet="like" />
+          </AssociationSet>
+          <AssociationSet Name="FK__like__userId__634EBE90" Association="Self.FK__like__userId__634EBE90">
+            <End Role="user" EntitySet="user" />
+            <End Role="like" EntitySet="like" />
+          </AssociationSet>
+          <AssociationSet Name="FK__post__cid__5CD6CB2B" Association="Self.FK__post__cid__5CD6CB2B">
+            <End Role="user" EntitySet="user" />
+            <End Role="post" EntitySet="post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Cid" />
+          </Key>
+          <Property Name="Cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="post" Relationship="Database1Model.FK__post__cid__5CD6CB2B" FromRole="user" ToRole="post" />
+          <NavigationProperty Name="comment" Relationship="Database1Model.FK__comment__userId__2739D489" FromRole="user" ToRole="comment" />
+          <NavigationProperty Name="like" Relationship="Database1Model.FK__like__userId__3D2915A8" FromRole="user" ToRole="like" />
+        </EntityType>
+        <EntityContainer Name="Database1Entities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="post" EntityType="Database1Model.post" />
+          <AssociationSet Name="FK__post__cid__5CD6CB2B" Association="Database1Model.FK__post__cid__5CD6CB2B">
+            <End Role="user" EntitySet="user" />
+            <End Role="post" EntitySet="post" />
+          </AssociationSet>
+          <EntitySet Name="comment" EntityType="Database1Model.comment" />
+          <AssociationSet Name="FK__comment__pId__04E4BC85" Association="Database1Model.FK__comment__pId__04E4BC85">
+            <End Role="post" EntitySet="post" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment__userId__2739D489" Association="Database1Model.FK__comment__userId__2739D489">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <EntitySet Name="like" EntityType="Database1Model.like" />
+          <AssociationSet Name="FK__like__postId__3C34F16F" Association="Database1Model.FK__like__postId__3C34F16F">
+            <End Role="post" EntitySet="post" />
+            <End Role="like" EntitySet="like" />
+          </AssociationSet>
+          <AssociationSet Name="FK__like__userId__3D2915A8" Association="Database1Model.FK__like__userId__3D2915A8">
+            <End Role="user" EntitySet="user" />
+            <End Role="like" EntitySet="like" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="ComplexType1">
+          <Property Type="Binary" Name="post_creatin" MaxLength="50" FixedLength="false" />
+        </ComplexType>
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="Tid" />
+          </Key>
+          <Property Name="Tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cid" Type="Int32" Nullable="false" />
+          <Property Name="artucle_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="article_body" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="post_creatin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="article_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numbers_of_views" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accept" Type="Int32" />
+          <Property Name="likes" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user" Relationship="Database1Model.FK__post__cid__5CD6CB2B" FromRole="post" ToRole="user" />
+          <Property Name="isNew" Type="Int32" />
+          <NavigationProperty Name="comment" Relationship="Database1Model.FK__comment__pId__04E4BC85" FromRole="post" ToRole="comment" />
+          <NavigationProperty Name="like" Relationship="Database1Model.FK__like__postId__3C34F16F" FromRole="post" ToRole="like" />
+        </EntityType>
+        <Association Name="FK__post__cid__5CD6CB2B">
+          <End Type="Database1Model.user" Role="user" Multiplicity="1" />
+          <End Type="Database1Model.post" Role="post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="post">
+              <PropertyRef Name="cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="Int32" Nullable="false" />
+          <Property Name="cBody" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="pId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="post" Relationship="Database1Model.FK__comment__pId__04E4BC85" FromRole="comment" ToRole="post" />
+          <Property Name="userId" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Database1Model.FK__comment__userId__2739D489" FromRole="comment" ToRole="user" />
+        </EntityType>
+        <Association Name="FK__comment__pId__04E4BC85">
+          <End Type="Database1Model.post" Role="post" Multiplicity="1" />
+          <End Type="Database1Model.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="post">
+              <PropertyRef Name="Tid" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="pId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment__userId__2739D489">
+          <End Type="Database1Model.user" Role="user" Multiplicity="0..1" />
+          <End Type="Database1Model.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="like">
+          <Key>
+            <PropertyRef Name="lId" />
+          </Key>
+          <Property Name="postId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="lId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="post" Relationship="Database1Model.FK__like__postId__3C34F16F" FromRole="like" ToRole="post" />
+          <NavigationProperty Name="user" Relationship="Database1Model.FK__like__userId__3D2915A8" FromRole="like" ToRole="user" />
+        </EntityType>
+        <Association Name="FK__like__postId__3C34F16F">
+          <End Type="Database1Model.post" Role="post" Multiplicity="1" />
+          <End Type="Database1Model.like" Role="like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="post">
+              <PropertyRef Name="Tid" />
+            </Principal>
+            <Dependent Role="like">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__like__userId__3D2915A8">
+          <End Type="Database1Model.user" Role="user" Multiplicity="1" />
+          <End Type="Database1Model.like" Role="like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="Cid" />
+            </Principal>
+            <Dependent Role="like">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities3">
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="Database1Model.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Cid" ColumnName="Cid" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="pnum" ColumnName="pnum" />
+                <ScalarProperty Name="user_role" ColumnName="user_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="post">
+            <EntityTypeMapping TypeName="Database1Model.post">
+              <MappingFragment StoreEntitySet="post">
+                <ScalarProperty Name="isNew" ColumnName="isNew" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="accept" ColumnName="accept" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="numbers_of_views" ColumnName="numbers_of_views" />
+                <ScalarProperty Name="article_type" ColumnName="article_type" />
+                <ScalarProperty Name="post_creatin" ColumnName="post_creatin" />
+                <ScalarProperty Name="article_body" ColumnName="article_body" />
+                <ScalarProperty Name="artucle_title" ColumnName="artucle_title" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="Tid" ColumnName="Tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comment">
+            <EntityTypeMapping TypeName="Database1Model.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="pId" ColumnName="pId" />
+                <ScalarProperty Name="cBody" ColumnName="cBody" />
+                <ScalarProperty Name="cId" ColumnName="cId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="like">
+            <EntityTypeMapping TypeName="Database1Model.like">
+              <MappingFragment StoreEntitySet="like">
+                <ScalarProperty Name="lId" ColumnName="lId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

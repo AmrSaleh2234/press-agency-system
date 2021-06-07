@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities3">
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="Database1Model.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="Cid" ColumnName="Cid" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="pnum" ColumnName="pnum" />
+          <ScalarProperty Name="user_role" ColumnName="user_role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="post">
+      <EntityTypeMapping TypeName="Database1Model.post">
+        <MappingFragment StoreEntitySet="post">
+          <ScalarProperty Name="isNew" ColumnName="isNew" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="likes" ColumnName="likes" />
+          <ScalarProperty Name="accept" ColumnName="accept" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="numbers_of_views" ColumnName="numbers_of_views" />
+          <ScalarProperty Name="article_type" ColumnName="article_type" />
+          <ScalarProperty Name="post_creatin" ColumnName="post_creatin" />
+          <ScalarProperty Name="article_body" ColumnName="article_body" />
+          <ScalarProperty Name="artucle_title" ColumnName="artucle_title" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="Tid" ColumnName="Tid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comment">
+      <EntityTypeMapping TypeName="Database1Model.comment">
+        <MappingFragment StoreEntitySet="comment">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="pId" ColumnName="pId" />
+          <ScalarProperty Name="cBody" ColumnName="cBody" />
+          <ScalarProperty Name="cId" ColumnName="cId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="like">
+      <EntityTypeMapping TypeName="Database1Model.like">
+        <MappingFragment StoreEntitySet="like">
+          <ScalarProperty Name="lId" ColumnName="lId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

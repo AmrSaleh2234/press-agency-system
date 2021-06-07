@@ -1,0 +1,157 @@
+﻿@model IEnumerable<WebApplication2.Models.postAndComment>
+
+
+@{
+    ViewBag.Title = "commentsAndposts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="post">
+
+    <div class="container">
+        
+        <div class="row " style="display:flex;justify-content:center">
+
+            <div class="col-md-9 col-sm-12 Post_page_column">
+
+
+                <div class="post_content--upper">
+                    <h2>
+
+                        @Model.ToList().FirstOrDefault().postDetalis.artucle_title
+                    </h2>
+                    <div class="d-flex">
+
+                        <i class="fas fa-user"></i><span>Editor :  @Model.ToList().FirstOrDefault().postDetalis.user.Username  &nbsp;&nbsp;&nbsp;post type: @Model.ToList().FirstOrDefault().postDetalis.article_type</span>
+
+
+                        @using (Html.BeginForm("create", "likes", FormMethod.Get ,new { style ="display:inline"}))
+                        {
+                            <input type="text" value=" @Model.ToList().FirstOrDefault().postDetalis.Tid" name="postId" style="display:none" />
+                            <button type="submit" style="background-color:transparent ;border:none;">
+                                <div class="glyphicon glyphicon-heart" style="margin-left:468px;font-size:40px"></div>
+                            </button>
+
+
+                        }
+                    </div>
+
+
+
+                    </div>
+                <div class="post_img " style="display:flex;justify-content:center;">
+                    <img src="@Url.Content(Model.ToList().FirstOrDefault().postDetalis.image)" alt="bike">
+                </div>
+                <p>
+
+                    @Model.ToList().FirstOrDefault().postDetalis.article_body
+
+
+                    }
+
+
+
+
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<header class="comment__head d-flex justify-content-center ">
+    <h2>comments</h2>
+</header>
+<!--================================================ start comment=================================================-->
+@if (@Model.ToList().FirstOrDefault().commentsDetails != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="comment">
+
+            <div class="container">
+
+                <div class="row justify-content-center">
+
+                    <div class="col-md-9 col-sm-12 Post_page_column">
+
+                        <header class="comment__head  justify-content-between">
+
+                            <div class="comment__head__img">
+
+                                <img src="@Url.Content(item.commentsDetails.user.photo)">
+
+                                <span>@item.commentsDetails.user.Username</span>
+
+                            </div>
+
+
+
+                        </header>
+
+                        <div class="comment__body">
+
+                            <p>
+                                @item.commentsDetails.cBody
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+
+
+
+<div class="row justify-content-center">
+    @if (Session.Keys.Count != 0){
+        
+    <button type="button" class="customButton" data-toggle="modal" data-target="#exampleModalCenter">
+        write a comment
+    </button>
+   
+    }
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("create", "comments", FormMethod.Get))
+            {
+                <div class="modal-body  d-flex justify-content-center">
+                    <textarea cols="60" rows="30" name="cBody" placeholder="Enter your comment"></textarea>
+                    <input type="text" name="pId" value="@Model.ToList().FirstOrDefault().postDetalis.Tid" style="display:none" />
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+
+
+                    <button type="submit" class="customButton">Save changes</button>
+
+
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+

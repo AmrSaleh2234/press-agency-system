@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .nav-center {
+            text-align: center;
+        }
+
+        .justify-content-center {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class=" navbar-inverse navbar-fixed-top">
+
+        <div class="row justify-content-center ">
+            @Html.ActionLink("Press Agency System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand nav-center" })
+        </div>
+        <div class="row " style="padding-bottom:20px">
+            <div class="container">
+                <div class="col-md-6">
+                    @using (Html.BeginForm("index", "home", FormMethod.Post))
+                    {
+                        <label style="color:#ffff">Filter:</label>
+                        <input type="text" name="filter" style="width:200px;height:30px" />
+                        <button type="submit" class="btn btn-primary">search</button>
+                    }
+
+
+                </div>
+                <div class="col-md-6">
+                    @{ if (Session.Keys.Count == 0)
+                        {
+
+
+                            <ul class="navbar-right list-inline form-inline">
+
+                                <li>
+                                    <button type="button" class="btn btn-primary margin-top" data-toggle="modal" data-target="#exampleModal">
+                                        login
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-primary  list-inline margin-top" data-toggle="modal" data-target="#exampleModal1">
+                                        Register
+                                    </button>
+                                </li>
+
+
+                            </ul>
+
+
+                        }
+                        else
+                        {
+                            <ul class="navbar-right list-inline form-inline text-" style="color:white; font-size:17px; margin-top:10px">
+                                <li> @Session["Username"] </li>
+                                <li>
+                                    @using (Html.BeginForm("logout", "Home", FormMethod.Post))
+                    {
+                                        <button type="submit" class="btn btn-danger">Logout</button>
+                    }
+                                </li>
+                            </ul>
+
+                            }
+                    }
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group">
+                            <label for="exampleInputusername">Username</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">FirstName</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="Fname" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">Lastname</label>
+                            <input type="text" class="form-control" name="lname" aria-describedby="emailHelp" placeholder="Enter email">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="img">Select image:</label>
+                            <input type="file" id="exampleInputEmail1" name="imgfile">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">phone Number</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="pnum" placeholder="Enter phon number">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @using (Html.BeginForm("login", "Home", FormMethod.Post))
+                    {
+
+
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" class="form-control" name="Username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" name="Password" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content" style="padding-top:30px; margin-top:70px">
+        <!----------------------------------------------------body-------------------------------------------->
+        @RenderBody()
+        <hr />
+        <!-----------------------------------------------------------footer---------------------------------->
+        <footer class="row">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </div>
+
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

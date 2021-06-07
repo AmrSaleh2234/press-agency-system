@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c850c94626504b799940f0be4105e33f" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.user" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.post" Width="1.5" PointX="4.25" PointY="0.5" />
+        <AssociationConnector Association="Database1Model.FK__post__cid__5CD6CB2B" />
+        <EntityTypeShape EntityType="Database1Model.comment" Width="1.5" PointX="6.625" PointY="2.875" />
+        <AssociationConnector Association="Database1Model.FK__comment__pId__04E4BC85" />
+        <AssociationConnector Association="Database1Model.FK__comment__userId__2739D489" />
+        <EntityTypeShape EntityType="Database1Model.like" Width="1.5" PointX="7.125" PointY="0.5" />
+        <AssociationConnector Association="Database1Model.FK__like__postId__3C34F16F" />
+        <AssociationConnector Association="Database1Model.FK__like__userId__3D2915A8" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

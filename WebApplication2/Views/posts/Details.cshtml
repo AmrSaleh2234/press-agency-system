@@ -1,0 +1,98 @@
+﻿@model WebApplication2.Models.post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.artucle_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.artucle_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_creatin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_creatin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numbers_of_views)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numbers_of_views)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accept)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.likes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.likes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Tid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

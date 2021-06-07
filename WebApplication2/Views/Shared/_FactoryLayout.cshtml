@@ -1,0 +1,139 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .color-white {
+            color: #ffffff;
+        }
+
+        .sidenav {
+            height: 100%; /* 100% Full-height */
+            position:fixed;
+            top:0;
+            left:0;
+
+            z-index: 1; /* Stay on top */
+        
+            background-color: #111; /* Black*/
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 116px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+            
+        }
+            /* The navigation menu links */
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                /* When you mouse over the navigation links, change their color */
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+        /* Position and style the close button (top right corner) */
+
+
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
+        @@media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+        .brandName {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 24px;
+            background-color: #044889;
+            padding-top: 25px
+        }
+
+        .logout-row {
+            background-color: #044889;
+        }
+
+        .logout {
+            font-size: 20px;
+            margin-right: 71px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="row text-center brandName ">
+                @Html.ActionLink("Press Agency System", "Index", "Home", new { area = "" }, new { @class = "color-white" })
+
+
+                <div class="row text-right logout-row">
+                    @using (Html.BeginForm("logout", "Home", FormMethod.Post))
+                    {
+                        
+                       
+                        <button type="submit" class="logout btn btn-danger">Logout</button>
+                    }
+                </div>
+            </div>
+        </div>   
+        
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-2" style="position:relative; height:100%">
+            
+                <div id="mySidenav" class="sidenav">
+
+                    <a href=" /users/Edit/@Session["Cid"]/"> profile</a>
+                    <a href="/posts/create/">Create new post</a>
+                    <a href="/posts/ShowMyPosts">My posts</a>
+                    <a href="#">Recevied qustions</a>
+                </div>
+            
+        </div>
+        <div class="col-md-10" style="padding-left:40px">
+
+            <div class="row content container">
+
+                @RenderBody()
+
+            </div>
+            <footer class="row container">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+            <div class="clearfix">...</div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

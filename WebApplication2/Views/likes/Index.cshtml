@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication2.Models.like>
+
+@{
+    ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_WallLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.post.artucle_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.post.artucle_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.lId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.lId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.lId })
+        </td>
+    </tr>
+}
+
+</table>

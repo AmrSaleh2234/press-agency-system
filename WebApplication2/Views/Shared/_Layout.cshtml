@@ -1,0 +1,327 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+    <style>
+        .customButton {
+            background: #044889;
+            color: #FFFFFF;
+            height: 50px;
+            width: 200px;
+            border-radius: 30px;
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 30px
+        }
+
+        .writeComment--cancleButton {
+            background: #FFFFFF;
+            color: #888;
+            height: 50px;
+            width: 200px;
+            border-radius: 30px;
+            border: none;
+            text-transform: capitalize;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .modal .modal-body textarea {
+            resize: none;
+        }
+
+        .modal .modal-footer {
+            border-top: none !important;
+        }
+
+        .justify-content-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .justify-content-between {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .thumbnail img {
+            width: 342px;
+            height: 200px;
+        }
+
+        .post {
+            margin-top: 80px;
+        }
+
+        .Post_page_column {
+            box-shadow: 5px 5px 10px #DDDDDD, -5px -5px 10px #DDDDDD;
+            padding: 30px;
+            border: none;
+        }
+
+        .post .post_content--upper i {
+            margin: 20px 5px 30px 0;
+        }
+
+        .post .post_img {
+            flex: 1 1 auto;
+            margin: 60px 0;
+        }
+
+            .post .post_img img {
+                width: 430px;
+                height: 250px;
+            }
+        /*============================================start comment==================================================*/
+        .comment {
+            margin: 30px 0 50px 0;
+        }
+
+        .comment__head h2 {
+            margin: 50px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .comment .comment__head .comment__head__img img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            padding: 3px;
+        }
+
+        .comment .comment__head .comment__head__img {
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .comment .comment__head .comment__head__date {
+            font-size: 18px;
+        }
+
+        .comment .comment__body {
+            margin-left: 50px;
+        }
+
+        .comment .comment__footer a {
+            color: black;
+            text-decoration: underline;
+        }
+
+        .comment .comment__footer {
+            margin-left: 58px;
+            border: none;
+        }
+
+
+        /*============================================end comment==================================================*/
+
+
+        /*============================================start write comment==================================================*/
+        .writeComment--cancleButton {
+            background: #FFFFFF;
+            color: #888;
+            height: 50px;
+            width: 200px;
+            border-radius: 30px;
+            border: none;
+            text-transform: capitalize;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .modal .modal-body textarea {
+            resize: none;
+        }
+
+        .modal .modal-footer {
+            border-top: none !important;
+        }
+
+         /*============================================end write comment==================================================*/
+
+
+    </style>
+
+
+
+
+</head>
+<body>
+    <!--------------------------------------------------header --------------------------------->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Press Agency System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <a href=" /users/Edit/@Session["Cid"]/"> profile</a></li>
+                    @if (Session["userRole"] != null && Session["userRole"].ToString() != "user")
+                    {
+                        <li> <a href=" /users/index/"> users' page</a></li>
+                        <li> <a href=" /posts/index/"> posts page</a></li>
+                        <li> <a href=" /posts/requests/"> posts requests</a></li>
+
+
+                    }
+
+
+                </ul>
+                @{ if (Session.Keys.Count == 0)
+                    {
+
+
+                        <ul class="navbar-right list-inline form-inline">
+
+                            <li>
+                                <button type="button" class="btn btn-primary margin-top" data-toggle="modal" data-target="#exampleModal">
+                                    login
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-primary  list-inline margin-top" data-toggle="modal" data-target="#exampleModal1">
+                                    Register
+                                </button>
+                            </li>
+
+
+                        </ul>
+
+
+                    }
+                    else
+                    {
+                        <ul class="navbar-right list-inline form-inline text-" style="color:white; font-size:17px; margin-top:10px">
+                            <li> @Session["Username"] </li>
+                            <li>
+                                @using (Html.BeginForm("logout", "Home", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-danger">Logout</button>
+                                }
+                            </li>
+                        </ul>
+
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group">
+                            <label for="exampleInputusername">Username</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">FirstName</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="Fname" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">Lastname</label>
+                            <input type="text" class="form-control" name="lname" aria-describedby="emailHelp" placeholder="Enter email">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="img">Select image:</label>
+                            <input type="file" id="exampleInputEmail1" name="imgfile">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputusername">phone Number</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="pnum" placeholder="Enter phon number">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @using (Html.BeginForm("login", "Home", FormMethod.Post))
+                    {
+
+
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" class="form-control" name="Username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" name="Password" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+        <!----------------------------------------------------body-------------------------------------------->
+        @RenderBody()
+        <hr />
+        <!-----------------------------------------------------------footer---------------------------------->
+        <footer class="row">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </div>
+            
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
